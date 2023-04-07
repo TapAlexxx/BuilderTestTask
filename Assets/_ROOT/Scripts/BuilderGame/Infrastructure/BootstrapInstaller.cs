@@ -1,10 +1,10 @@
-using BuilderGame.Infrastructure.Ads;
-using BuilderGame.Infrastructure.Ads.Fake;
-using BuilderGame.Infrastructure.Input;
+using _ROOT.Scripts.BuilderGame.Infrastructure.Ads;
+using _ROOT.Scripts.BuilderGame.Infrastructure.Ads.Fake;
+using _ROOT.Scripts.BuilderGame.Infrastructure.Input;
 using UnityEngine;
 using Zenject;
 
-namespace BuilderGame.Infrastructure
+namespace _ROOT.Scripts.BuilderGame.Infrastructure
 {
     public class BootstrapInstaller : MonoInstaller, IInitializable
     {

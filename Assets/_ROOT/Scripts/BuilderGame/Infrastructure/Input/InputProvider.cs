@@ -1,7 +1,7 @@
-﻿namespace BuilderGame.Infrastructure.Input
-{
-    using UnityEngine;
+﻿using UnityEngine;
 
+namespace _ROOT.Scripts.BuilderGame.Infrastructure.Input
+{
     public class InputProvider : IInputProvider
     {
         private const string Horizontal = "Horizontal";

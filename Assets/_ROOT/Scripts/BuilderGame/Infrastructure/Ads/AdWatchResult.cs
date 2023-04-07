@@ -1,4 +1,4 @@
-﻿namespace BuilderGame.Infrastructure.Ads
+﻿namespace _ROOT.Scripts.BuilderGame.Infrastructure.Ads
 {
     public enum AdWatchResult
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuilderGame.Infrastructure.Ads
+namespace _ROOT.Scripts.BuilderGame.Infrastructure.Ads
 {
     public interface IAdvertiser
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuilderGame.Infrastructure.Ads.Fake
+namespace _ROOT.Scripts.BuilderGame.Infrastructure.Ads.Fake
 {
     public class FakeAdvertiser : IAdvertiser
     {

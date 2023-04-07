@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BuilderGame.Gameplay.Unit
+namespace _ROOT.Scripts.BuilderGame.Gameplay.Unit.Movement
 {
     [RequireComponent(typeof(CharacterController))]
     public class UnitMovement : MonoBehaviour
