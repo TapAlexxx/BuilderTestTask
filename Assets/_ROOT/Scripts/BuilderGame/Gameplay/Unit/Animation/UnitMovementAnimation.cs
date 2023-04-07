@@ -1,7 +1,7 @@
-﻿using _ROOT.Scripts.BuilderGame.Gameplay.Unit.Movement;
+﻿using BuilderGame.Gameplay.Unit.Movement;
 using UnityEngine;
 
-namespace _ROOT.Scripts.BuilderGame.Gameplay.Unit.Animation
+namespace BuilderGame.Gameplay.Unit.Animation
 {
     public class UnitMovementAnimation : MonoBehaviour
     {

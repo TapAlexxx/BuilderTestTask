@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace _ROOT.Scripts.BuilderGame
+namespace BuilderGame
 {
     public class BuilderGameInstaller : MonoInstaller, IInitializable
     {

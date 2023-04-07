@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _ROOT.Scripts.BuilderGame.Infrastructure.Input
+namespace BuilderGame.Infrastructure.Input
 {
     public class InputProvider : IInputProvider
     {

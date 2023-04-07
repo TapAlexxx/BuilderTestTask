@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace _ROOT.Scripts.BuilderGame.Infrastructure.Ads.Fake
+namespace BuilderGame.Infrastructure.Ads.Fake
 {
     public class FakeAdsWindow : MonoBehaviour
     {

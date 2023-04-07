@@ -1,8 +1,8 @@
-﻿using _ROOT.Scripts.BuilderGame.Infrastructure.Input;
+﻿using BuilderGame.Infrastructure.Input;
 using UnityEngine;
 using Zenject;
 
-namespace _ROOT.Scripts.BuilderGame.Gameplay.Unit.Movement
+namespace BuilderGame.Gameplay.Unit.Movement
 {
     [RequireComponent(typeof(UnitMovement))]
     public class PlayerMovementControl : MonoBehaviour

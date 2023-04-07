@@ -1,7 +1,7 @@
-﻿using _ROOT.Scripts.BuilderGame.Gameplay.Unit.Movement;
+﻿using BuilderGame.Gameplay.Unit.Movement;
 using UnityEngine;
 
-namespace _ROOT.Scripts.BuilderGame.Gameplay.Unit.Rotation
+namespace BuilderGame.Gameplay.Unit.Rotation
 {
     [RequireComponent(typeof(UnitRotation), typeof(UnitMovement))]
     public class MovementControlRotation : MonoBehaviour
