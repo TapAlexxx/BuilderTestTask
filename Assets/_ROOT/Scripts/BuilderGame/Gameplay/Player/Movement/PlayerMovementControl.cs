@@ -13,6 +13,7 @@ namespace BuilderGame.Gameplay.Player.Movement
         
         private Camera mainCamera;
         private IInputProvider inputProvider;
+        private bool active;
 
         private void OnValidate()
         {
@@ -32,6 +33,9 @@ namespace BuilderGame.Gameplay.Player.Movement
 
         private void Update()
         {
+            if(!active)
+                return;
+            
             var input = inputProvider.Axis;
 
             var movementVector = mainCamera.transform.TransformDirection(input);
@@ -39,6 +43,17 @@ namespace BuilderGame.Gameplay.Player.Movement
             movementVector.Normalize();
             
             unitMovement.SetMovementDirection(movementVector);
+        }
+
+        public void Disable()
+        {
+            unitMovement.SetMovementDirection(Vector3.zero);
+            active = false;
+        }
+
+        public void Activate()
+        {
+            active = true;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace BuilderGame.Gameplay.Unit.Movement
         
         private Vector3 smoothedVelocity;
         private Vector3 currentVelocity;
+        private bool active;
 
         private void OnValidate()
         {
