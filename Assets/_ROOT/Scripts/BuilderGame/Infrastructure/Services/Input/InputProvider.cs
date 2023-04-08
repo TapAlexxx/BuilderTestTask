@@ -1,5 +1,4 @@
-﻿using BuilderGame.Infrastructure.Input;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BuilderGame.Infrastructure.Services.Input
 {
