@@ -1895,6 +1895,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VillagerDigger
       objectReference: {fileID: 0}
+    - target: {fileID: 3872609905590291749, guid: 17594bbed94550449bbd7ee0a2ae9f05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: beba73b7eeba6be409db3a3b0e8ff3a5, type: 2}
     - target: {fileID: 8757502458817033906, guid: 17594bbed94550449bbd7ee0a2ae9f05, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.073
@@ -6605,7 +6609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6962a49b6841e0a7acd93196383c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 2.3
   smoothness: 0.1
   characterController: {fileID: 1957571253}
 --- !u!143 &1957571253
@@ -6635,7 +6639,7 @@ Transform:
   m_GameObject: {fileID: 1957571248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.53, y: 0.53, z: 0.53}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 343271746}
