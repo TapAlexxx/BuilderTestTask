@@ -1,5 +1,7 @@
-﻿using BuilderGame.Gameplay.Player.Movement;
+﻿using BuilderGame.Gameplay.Player;
+using BuilderGame.Gameplay.Player.Movement;
 using BuilderGame.Gameplay.Unit.Animation;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BuilderGame.Gameplay.Tests
@@ -10,6 +12,7 @@ namespace BuilderGame.Gameplay.Tests
         [SerializeField] private AnimationEventCallbacks animationEventCallbacks;
         [SerializeField] private UnitActionAnimation unitActionAnimation;
         [SerializeField] private PlayerMovementControl playerMovement;
+        [SerializeField] private ItemChanger itemChanger;
         
         private Cell cellToInteract;
 
@@ -19,6 +22,7 @@ namespace BuilderGame.Gameplay.Tests
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
             unitActionAnimation = GetComponentInChildren<UnitActionAnimation>();
             playerMovement = GetComponentInChildren<PlayerMovementControl>();
+            itemChanger = GetComponentInChildren<ItemChanger>();
         }
 
         private void Start()
@@ -64,7 +68,7 @@ namespace BuilderGame.Gameplay.Tests
                 case PlantState.Growing:
                     break;
                 case PlantState.Harvestable:
-                    cell.Harvest();
+                    Harvest(cell);
                     break;
                 case PlantState.Harvested:
                     break;
@@ -73,12 +77,14 @@ namespace BuilderGame.Gameplay.Tests
 
         private void StartPlow()
         {
+            itemChanger.Take(ItemType.Plowing);
             playerMovement.Disable();
             unitActionAnimation.Animate(AnimationType.Plow);
         }
 
         private void StartPlant()
         {
+            itemChanger.Take(ItemType.Planting);
             playerMovement.Disable();
             unitActionAnimation.Animate(AnimationType.Plant);
         }
@@ -87,6 +93,7 @@ namespace BuilderGame.Gameplay.Tests
         {
             unitActionAnimation.Disable();
             cellToInteract.Plant();
+            itemChanger.HideIfExist();
             playerMovement.Activate();
         }
 
@@ -94,6 +101,7 @@ namespace BuilderGame.Gameplay.Tests
         {
             cellToInteract.Plow();
             unitActionAnimation.Disable();
+            itemChanger.HideIfExist();
             if (cellToInteract.AbleToSwitchState)
             {
                 TryInteractWithCell(cellToInteract);
@@ -102,6 +110,12 @@ namespace BuilderGame.Gameplay.Tests
             {
                 playerMovement.Activate();
             }
+        }
+
+        private void Harvest(Cell cell)
+        {
+            unitActionAnimation.AnimateHarvest();
+            cell.Harvest();
         }
     }
 }
