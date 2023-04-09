@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BuilderGame.Gameplay.Unit.Animation
@@ -11,10 +12,16 @@ namespace BuilderGame.Gameplay.Unit.Animation
         private readonly int plowParameter = Animator.StringToHash("Plow");
         private readonly int plantParameter = Animator.StringToHash("Plant");
         private int currentParameter;
+        private Vector3 initialScale;
 
         private void OnValidate()
         {
             animator = GetComponentInChildren<Animator>();
+        }
+
+        private void Start()
+        {
+            initialScale = transform.localScale;
         }
 
         public void Animate(AnimationType animationType)
@@ -34,6 +41,13 @@ namespace BuilderGame.Gameplay.Unit.Animation
         public void Disable()
         {
             animator.SetBool(currentParameter, false);
+        }
+
+        public void AnimateHarvest()
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(transform.DOScale(initialScale * 1.15f, 0.15f));
+            sequence.Append(transform.DOScale(initialScale, 0.2f));
         }
     }
 }
