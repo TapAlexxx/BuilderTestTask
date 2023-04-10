@@ -6,6 +6,7 @@ namespace BuilderGame.Gameplay.Tests
 {
     public class Grid : MonoBehaviour
     {
+        [SerializeField] private Vector2Int gridSize;
         [SerializeField] private List<Cell> cells;
         
         private int cellsChangedState;
@@ -43,6 +44,20 @@ namespace BuilderGame.Gameplay.Tests
         {
             foreach (Cell cell in cells) 
                 cell.MakeAbleToSwitchState();
+        }
+
+        public void GenerateGrid()
+        {
+            for (int i = 0; i < gridSize.x; i++)
+            {
+                for (int j = 0; j < gridSize.y; j++)
+                {
+                    Cell cell = new GameObject().AddComponent<Cell>();
+                    cell.transform.position = transform.position + new Vector3(i, 0, j);
+                    cell.name = $"cell {i} {j}";
+                    cell.transform.parent = transform;
+                }
+            }
         }
     }
 }
