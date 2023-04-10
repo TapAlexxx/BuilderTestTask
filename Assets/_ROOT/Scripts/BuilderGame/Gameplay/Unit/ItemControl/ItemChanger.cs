@@ -47,7 +47,7 @@ namespace BuilderGame.Gameplay.Player
         private void TakePlanting() => 
             Take(ItemType.Planting);
 
-        public void Take(ItemType itemType)
+        private void Take(ItemType itemType)
         {
             HideIfExist();
             currentItem = items.FirstOrDefault(x => x.ItemType == itemType);
@@ -57,7 +57,7 @@ namespace BuilderGame.Gameplay.Player
             currentItem.ItebObject.transform.DOScale(currentItem.TargetScale, currentItem.AppearingTime);
         }
 
-        public void HideIfExist()
+        private void HideIfExist()
         {
             if(currentItem == null)
                 return;

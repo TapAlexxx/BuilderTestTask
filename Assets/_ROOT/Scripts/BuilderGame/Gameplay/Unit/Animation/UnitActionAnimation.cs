@@ -19,25 +19,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
             animator = GetComponentInChildren<Animator>();
         }
 
-        private void Start()
-        {
-            initialScale = transform.localScale;
-        }
-
-        public void Animate(AnimationType animationType)
-        {
-            currentParameter = GetParameter(animationType);
-            animator.SetBool(currentParameter, true);
-        }
-
-        private int GetParameter(AnimationType animationType) =>
-            animationType switch
-            {
-                AnimationType.Plow => plowParameter,
-                AnimationType.Plant => plantParameter,
-                _ => throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null)
-            };
-
         public void Disable()
         {
             animator.SetBool(currentParameter, false);
@@ -49,5 +30,22 @@ namespace BuilderGame.Gameplay.Unit.Animation
             sequence.Append(transform.DOScale(initialScale * 1.3f, 0.15f));
             sequence.Append(transform.DOScale(initialScale, 0.2f));
         }
+
+        public void Animate(AnimationType animationType)
+        {
+            currentParameter = GetParameter(animationType);
+            animator.SetBool(currentParameter, true);
+        }
+
+        private void Start() => 
+            initialScale = transform.localScale;
+
+        private int GetParameter(AnimationType animationType) =>
+            animationType switch
+            {
+                AnimationType.Plow => plowParameter,
+                AnimationType.Plant => plantParameter,
+                _ => throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null)
+            };
     }
 }

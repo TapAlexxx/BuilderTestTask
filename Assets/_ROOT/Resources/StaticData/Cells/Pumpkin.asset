@@ -18,13 +18,13 @@ MonoBehaviour:
   GrowTime: {x: 2, y: 4}
   GrowType: 1
   Textures:
-  - cellState: 0
+  - plantCellState: 0
     Material: {fileID: 2100000, guid: 49ca5b6b9bc21464081bc5be2701aca1, type: 2}
-  - cellState: 1
+  - plantCellState: 1
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
-  - cellState: 2
+  - plantCellState: 2
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
-  - cellState: 3
+  - plantCellState: 3
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
-  - cellState: 4
+  - plantCellState: 4
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}

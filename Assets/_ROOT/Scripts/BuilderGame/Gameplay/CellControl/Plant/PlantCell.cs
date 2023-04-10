@@ -40,9 +40,6 @@ namespace BuilderGame.Gameplay.CellControl
             BecameInteractable?.Invoke(this);
         }
 
-        private void DisableInteraction() => 
-            Interactable = false;
-
         public void Plow()
         {
             DisableInteraction();
@@ -57,6 +54,36 @@ namespace BuilderGame.Gameplay.CellControl
             cellViewControl.Show(PlantCellState.Planted);
             StartGrow();
         }
+
+        public void Harvest()
+        {
+            DisableInteraction();
+            SwitchState(PlantCellState.Harvested);
+            cellViewControl.Show(PlantCellState.Harvested);
+            plantGrower.Scale(Vector3.zero);
+            Harvested?.Invoke();
+        }
+
+        public void StartResetWithDelay(float delay)
+        {
+            if (resetCoroutine != null)
+            {
+                StopCoroutine(resetCoroutine);
+                resetCoroutine = null;
+            }
+            resetCoroutine = StartCoroutine(ResetWithDelay(delay));
+        }
+
+        public void Reset()
+        {
+            SwitchState(PlantCellState.Grass);
+            cellViewControl.Show(PlantCellState.Grass);
+            plantGrower.Reset();
+            ReadeToChangState?.Invoke();
+        }
+
+        private void DisableInteraction() => 
+            Interactable = false;
 
         private void StartGrow()
         {
@@ -95,40 +122,13 @@ namespace BuilderGame.Gameplay.CellControl
             MakeInteractable();
         }
 
-        public void Harvest()
-        {
-            DisableInteraction();
-            SwitchState(PlantCellState.Harvested);
-            cellViewControl.Show(PlantCellState.Harvested);
-            plantGrower.Scale(Vector3.zero);
-            Harvested?.Invoke();
-        }
-
         private void SwitchState(PlantCellState plantCellState) => 
             CurrentState = plantCellState;
-
-        public void StartResetWithDelay(float delay)
-        {
-            if (resetCoroutine != null)
-            {
-                StopCoroutine(resetCoroutine);
-                resetCoroutine = null;
-            }
-            resetCoroutine = StartCoroutine(ResetWithDelay(delay));
-        }
 
         private IEnumerator ResetWithDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
             Reset();
-        }
-
-        public void Reset()
-        {
-            SwitchState(PlantCellState.Grass);
-            cellViewControl.Show(PlantCellState.Grass);
-            plantGrower.Reset();
-            ReadeToChangState?.Invoke();
         }
     }
 }

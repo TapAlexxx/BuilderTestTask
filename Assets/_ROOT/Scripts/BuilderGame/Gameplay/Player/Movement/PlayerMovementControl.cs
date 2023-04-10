@@ -22,20 +22,23 @@ namespace BuilderGame.Gameplay.Player.Movement
         }
 
         [Inject]
-        public void Construct(IInputProvider inputProvider)
-        {
+        public void Construct(IInputProvider inputProvider) => 
             this.inputProvider = inputProvider;
+
+        public void Activate() => 
+            active = true;
+
+        public void Disable()
+        {
+            active = false;
+            unitMovement.SetMovementDirection(Vector3.zero);
         }
 
-        private void Awake()
-        {
+        private void Awake() => 
             Activate();
-        }
 
-        private void Start()
-        {
+        private void Start() => 
             mainCamera = Camera.main;
-        }
 
         private void Update()
         {
@@ -44,22 +47,17 @@ namespace BuilderGame.Gameplay.Player.Movement
             
             var input = inputProvider.Axis;
 
-            var movementVector = mainCamera.transform.TransformDirection(input);
-            movementVector.y = 0f;
-            movementVector.Normalize();
-            
+            var movementVector = GetMovementVector(input);
+
             unitMovement.SetMovementDirection(movementVector);
         }
 
-        public void Disable()
+        private Vector3 GetMovementVector(Vector2 input)
         {
-            active = false;
-            unitMovement.SetMovementDirection(Vector3.zero);
-        }
-
-        public void Activate()
-        {
-            active = true;
+            var movementVector = mainCamera.transform.TransformDirection(input);
+            movementVector.y = 0f;
+            movementVector.Normalize();
+            return movementVector;
         }
     }
 }

@@ -1,18 +1,13 @@
-﻿using System;
-using BuilderGame.Gameplay.Unit.Movement;
+﻿using BuilderGame.Gameplay.Unit.Movement;
 using UnityEngine;
 
 namespace BuilderGame.Gameplay.Unit.Animation
 {
     public class UnitMovementAnimation : MonoBehaviour
     {
-        [SerializeField] 
-        private float damp = 0.15f;
-        
-        [SerializeField]
-        private UnitMovement unitMovement;
-        [SerializeField]
-        private Animator animator;
+        [SerializeField] private float damp = 0.15f;
+        [SerializeField] private UnitMovement unitMovement;
+        [SerializeField] private Animator animator;
 
         private readonly int movementParameter = Animator.StringToHash("Movement");
 

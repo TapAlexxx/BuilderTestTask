@@ -21,18 +21,18 @@ namespace BuilderGame.Gameplay.CellControl
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
         }
 
-        private void Start() => 
-            animationEventCallbacks.Plowed += Plow;
-
-        private void OnDestroy() => 
-            animationEventCallbacks.Plowed -= Plow;
-
         public void StartPlow(PlantCell plantCell)
         {
             StartedInteract?.Invoke();
             plantCellToInteract = plantCell;
             unitActionAnimation.Animate(AnimationType.Plow);
         }
+
+        private void Start() => 
+            animationEventCallbacks.Plowed += Plow;
+
+        private void OnDestroy() => 
+            animationEventCallbacks.Plowed -= Plow;
 
         private void Plow()
         {

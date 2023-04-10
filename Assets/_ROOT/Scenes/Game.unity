@@ -2891,12 +2891,16 @@ GameObject:
   - component: {fileID: 1957571254}
   - component: {fileID: 1957571253}
   - component: {fileID: 1957571255}
-  - component: {fileID: 1957571252}
   - component: {fileID: 1957571251}
-  - component: {fileID: 1957571250}
   - component: {fileID: 1957571249}
-  - component: {fileID: 1957571256}
   - component: {fileID: 1957571257}
+  - component: {fileID: 1957571252}
+  - component: {fileID: 1957571250}
+  - component: {fileID: 1957571256}
+  - component: {fileID: 1957571261}
+  - component: {fileID: 1957571260}
+  - component: {fileID: 1957571259}
+  - component: {fileID: 1957571258}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3018,10 +3022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerObserver: {fileID: 1957571255}
-  animationEventCallbacks: {fileID: 1967416635}
-  unitActionAnimation: {fileID: 343271748}
-  playerMovement: {fileID: 1957571251}
-  itemChanger: {fileID: 1957571257}
+  unitPlower: {fileID: 1957571261}
+  unitPlanter: {fileID: 1957571260}
+  unitHarvester: {fileID: 1957571259}
+  playerStateControl: {fileID: 1957571258}
 --- !u!114 &1957571257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3043,6 +3047,66 @@ MonoBehaviour:
     ItebObject: {fileID: 1189561342}
     TargetScale: {x: 0.7, y: 0.7, z: 0.7}
     AppearingTime: 0.3
+  unitPlower: {fileID: 1957571261}
+  unitPlanter: {fileID: 1957571260}
+--- !u!114 &1957571258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957571248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a4ba22e549453db9669ea72ccceb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactables:
+  - {fileID: 1957571261}
+  - {fileID: 1957571260}
+  - {fileID: 1957571259}
+  playerMovementControl: {fileID: 1957571251}
+--- !u!114 &1957571259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957571248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d884a949d295414c9f8f66e6917236ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitActionAnimation: {fileID: 343271748}
+--- !u!114 &1957571260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957571248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f6465cca8941efac7e577085af814a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitActionAnimation: {fileID: 343271748}
+  animationEventCallbacks: {fileID: 1967416635}
+--- !u!114 &1957571261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957571248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4b206b9cca42ceafb64a44274bea88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitActionAnimation: {fileID: 343271748}
+  animationEventCallbacks: {fileID: 1967416635}
 --- !u!1 &1967416634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3872609905231442990, guid: 17594bbed94550449bbd7ee0a2ae9f05, type: 3}

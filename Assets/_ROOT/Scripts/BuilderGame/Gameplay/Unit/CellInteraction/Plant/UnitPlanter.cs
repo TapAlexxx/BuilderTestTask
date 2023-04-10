@@ -15,18 +15,12 @@ namespace BuilderGame.Gameplay.CellControl
 
         public override event Action StartedInteract;
         public override event Action EndedInteract;
-        
+
         private void OnValidate()
         {
             unitActionAnimation = GetComponentInChildren<UnitActionAnimation>();
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
         }
-        
-        private void Start() => 
-            animationEventCallbacks.Planted += Plant;
-
-        private void OnDestroy() => 
-            animationEventCallbacks.Planted -= Plant;
 
         public void StartPlant(PlantCell plantCell)
         {
@@ -34,6 +28,12 @@ namespace BuilderGame.Gameplay.CellControl
             plantCellToInteract = plantCell;
             unitActionAnimation.Animate(AnimationType.Plant);
         }
+
+        private void Start() => 
+            animationEventCallbacks.Planted += Plant;
+
+        private void OnDestroy() => 
+            animationEventCallbacks.Planted -= Plant;
 
         private void Plant()
         {

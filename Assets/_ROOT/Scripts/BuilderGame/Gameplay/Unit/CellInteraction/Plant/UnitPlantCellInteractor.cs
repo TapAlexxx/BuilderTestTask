@@ -24,19 +24,14 @@ namespace BuilderGame.Gameplay.CellControl
 
         private void Start()
         {
-            availableCells = new List<PlantCell>();
-            triggerObserver.TriggerEnter += TryAddPlantCell;
-            triggerObserver.TriggerExit += TryRemovePlantCell;
+            Initialize();
+            SubscribeOnTriggerEvents();
         }
 
         private void OnDestroy()
         {
-            triggerObserver.TriggerEnter -= TryAddPlantCell;
-            triggerObserver.TriggerExit -= TryRemovePlantCell;
-
-
-            foreach (PlantCell plantCell in availableCells)
-                plantCell.BecameInteractable -= AddInAvailable;
+            UnsubscribeFromTriggerEvents();
+            UnsubscribeFromAvailableCells();
         }
 
         private void Update()
@@ -47,6 +42,9 @@ namespace BuilderGame.Gameplay.CellControl
             if(availableCells.Count > 0) 
                 TryInteractWithCell(availableCells[0]);
         }
+
+        private void Initialize() => 
+            availableCells = new List<PlantCell>();
 
         private void TryAddPlantCell(Collider obj)
         {
@@ -87,6 +85,24 @@ namespace BuilderGame.Gameplay.CellControl
                     unitHarvester.Harvest(plantCell);
                     break;
             }
+        }
+
+        private void SubscribeOnTriggerEvents()
+        {
+            triggerObserver.TriggerEnter += TryAddPlantCell;
+            triggerObserver.TriggerExit += TryRemovePlantCell;
+        }
+
+        private void UnsubscribeFromTriggerEvents()
+        {
+            triggerObserver.TriggerEnter -= TryAddPlantCell;
+            triggerObserver.TriggerExit -= TryRemovePlantCell;
+        }
+
+        private void UnsubscribeFromAvailableCells()
+        {
+            foreach (PlantCell plantCell in availableCells)
+                plantCell.BecameInteractable -= AddInAvailable;
         }
     }
 }

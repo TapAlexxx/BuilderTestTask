@@ -8,7 +8,7 @@ using Zenject;
 
 namespace BuilderGame.Gameplay.CellControl
 {
-    public class Grid : MonoBehaviour
+    public class PlantGrid : MonoBehaviour
     {
         [SerializeField] private PlantType plantType;
         [SerializeField] private Vector2Int gridSize;
@@ -26,6 +26,29 @@ namespace BuilderGame.Gameplay.CellControl
         {
             this.staticDataService = staticDataService;
             Initialize();
+        }
+
+        public void GenerateGrid()
+        {
+            Clear();
+            for (int i = 0; i < gridSize.x; i++)
+            {
+                for (int j = 0; j < gridSize.y; j++)
+                {
+                    GameObject plantCell = (GameObject)PrefabUtility.InstantiatePrefab(cellPrefab);
+                    plantCell.transform.position = transform.position + new Vector3(i, 0, j);
+                    plantCell.name = $"cell {i} {j}";
+                    plantCell.transform.parent = transform;
+                    cells.Add(plantCell.GetComponent<PlantCell>());
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            foreach (Transform child in transform)
+                DestroyImmediate(child.gameObject);
+            cells.Clear();
         }
 
         private void Initialize()
@@ -91,29 +114,6 @@ namespace BuilderGame.Gameplay.CellControl
         {
             foreach (PlantCell cell in cells) 
                 cell.MakeInteractable();
-        }
-
-        public void GenerateGrid()
-        {
-            Clear();
-            for (int i = 0; i < gridSize.x; i++)
-            {
-                for (int j = 0; j < gridSize.y; j++)
-                {
-                    GameObject plantCell = (GameObject)PrefabUtility.InstantiatePrefab(cellPrefab);
-                    plantCell.transform.position = transform.position + new Vector3(i, 0, j);
-                    plantCell.name = $"cell {i} {j}";
-                    plantCell.transform.parent = transform;
-                    cells.Add(plantCell.GetComponent<PlantCell>());
-                }
-            }
-        }
-
-        public void Clear()
-        {
-            foreach (Transform child in transform)
-                DestroyImmediate(child.gameObject);
-            cells.Clear();
         }
     }
 }

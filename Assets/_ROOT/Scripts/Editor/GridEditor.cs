@@ -1,22 +1,22 @@
-﻿using UnityEditor;
+﻿using BuilderGame.Gameplay.CellControl;
+using UnityEditor;
 using UnityEngine;
-using Grid = BuilderGame.Gameplay.CellControl.Grid;
 
 namespace _ROOT.Scripts.Editor
 {
-    [CustomEditor(typeof(Grid))]
+    [CustomEditor(typeof(PlantGrid))]
     public class GridEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            Grid grid = (Grid)target;
+            PlantGrid plantGrid = (PlantGrid)target;
             if (GUILayout.Button("GenerateGrid"))
             {
-                grid.GenerateGrid();
+                plantGrid.GenerateGrid();
             }
             if (GUILayout.Button("HandClear"))
-                grid.Clear();
+                plantGrid.Clear();
         }
     }
 }
