@@ -1,4 +1,7 @@
-﻿using BuilderGame.StaticData;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BuilderGame.StaticData;
+using BuilderGame.StaticData.Plants;
 using UnityEngine;
 
 namespace BuilderGame.Infrastructure.Services.StaticData
@@ -7,13 +10,17 @@ namespace BuilderGame.Infrastructure.Services.StaticData
     {
         private const string GameConfigPath = "StaticData/Cells";
         
-        private CellStaticData cellStaticData;
+        private List<PlantStaticData> plantStaticData;
 
 
         public void LoadData()
         {
-            cellStaticData = Resources
-                .Load<CellStaticData>(GameConfigPath);
+            plantStaticData = Resources
+                .LoadAll<PlantStaticData>(GameConfigPath)
+                .ToList();
         }
+
+        public PlantStaticData GetPlantStaticData(PlantType plantType) => 
+            plantStaticData.FirstOrDefault(x => x.PlantType == plantType);
     }
 }

@@ -1,10 +1,9 @@
 ﻿using BuilderGame.Gameplay.Player;
 using BuilderGame.Gameplay.Player.Movement;
 using BuilderGame.Gameplay.Unit.Animation;
-using DG.Tweening;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Tests
+namespace BuilderGame.Gameplay.CellControl
 {
     public class Player : MonoBehaviour
     {
@@ -14,7 +13,7 @@ namespace BuilderGame.Gameplay.Tests
         [SerializeField] private PlayerMovementControl playerMovement;
         [SerializeField] private ItemChanger itemChanger;
         
-        private Cell cellToInteract;
+        private PlantCell plantCellToInteract;
 
         private void OnValidate()
         {
@@ -43,34 +42,29 @@ namespace BuilderGame.Gameplay.Tests
 
         private void ValidateTrigger(Collider obj)
         {
-            if (obj.TryGetComponent(out Cell cell))
+            if (obj.TryGetComponent(out PlantCell cell))
             {
                 TryInteractWithCell(cell);
             }
         }
 
-        private void TryInteractWithCell(Cell cell)
+        private void TryInteractWithCell(PlantCell plantCell)
         {
-            Debug.Log(cell.CurrentState + " " + cell.AbleToSwitchState);
-            if(!cell.AbleToSwitchState)
+            if(!plantCell.Interactable)
                 return;
-            cellToInteract = cell;
-            switch(cell.CurrentState)
+            plantCellToInteract = plantCell;
+            switch(plantCell.CurrentState)
             {
-                case PlantState.Grass:
+                case CellState.Grass:
                     StartPlow();
                     break;
-                case PlantState.Plowed:
+                case CellState.Plowed:
                     StartPlant();
                     break;
-                case PlantState.Planted:
+                case CellState.Grown:
+                    Harvest();
                     break;
-                case PlantState.Growing:
-                    break;
-                case PlantState.Harvestable:
-                    Harvest(cell);
-                    break;
-                case PlantState.Harvested:
+                case CellState.Harvested:
                     break;
             }
         }
@@ -91,31 +85,28 @@ namespace BuilderGame.Gameplay.Tests
 
         private void Plant()
         {
+            plantCellToInteract.Plant();
             unitActionAnimation.Disable();
-            cellToInteract.Plant();
             itemChanger.HideIfExist();
             playerMovement.Activate();
         }
 
         private void Plow()
         {
-            cellToInteract.Plow();
+            plantCellToInteract.Plow();
             unitActionAnimation.Disable();
             itemChanger.HideIfExist();
-            if (cellToInteract.AbleToSwitchState)
-            {
-                TryInteractWithCell(cellToInteract);
-            }
+            
+            if (plantCellToInteract.Interactable)
+                TryInteractWithCell(plantCellToInteract);
             else
-            {
                 playerMovement.Activate();
-            }
         }
 
-        private void Harvest(Cell cell)
+        private void Harvest()
         {
             unitActionAnimation.AnimateHarvest();
-            cell.Harvest();
+            plantCellToInteract.Harvest();
         }
     }
 }
