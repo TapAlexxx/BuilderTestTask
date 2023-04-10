@@ -1,4 +1,6 @@
-﻿using BuilderGame.Gameplay.Player;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
+using BuilderGame.Gameplay.Player;
 using BuilderGame.Gameplay.Player.Movement;
 using BuilderGame.Gameplay.Unit.Animation;
 using UnityEngine;
@@ -14,6 +16,8 @@ namespace BuilderGame.Gameplay.CellControl
         [SerializeField] private ItemChanger itemChanger;
         
         private PlantCell plantCellToInteract;
+        private List<PlantCell> availableCells;
+        private bool interacting;
 
         private void OnValidate()
         {
@@ -27,86 +31,117 @@ namespace BuilderGame.Gameplay.CellControl
         private void Start()
         {
             playerMovement.Activate();
-
-            triggerObserver.TriggerEnter += ValidateTrigger;
+            availableCells = new List<PlantCell>();
+            triggerObserver.TriggerEnter += OnTriggerEntered;
+            triggerObserver.TriggerExit += OnTriggerExited;
             animationEventCallbacks.Plowed += Plow;
             animationEventCallbacks.Planted += Plant;
         }
 
         private void OnDestroy()
         {
-            triggerObserver.TriggerEnter -= ValidateTrigger;
+            triggerObserver.TriggerEnter -= OnTriggerEntered;
+            triggerObserver.TriggerExit -= OnTriggerExited;
             animationEventCallbacks.Plowed -= Plow;
             animationEventCallbacks.Planted -= Plant;
+            
+            foreach (PlantCell plantCell in availableCells) 
+                plantCell.BecameInteractable -= AddInAvailable;
         }
 
-        private void ValidateTrigger(Collider obj)
+        private void OnTriggerEntered(Collider obj)
+        {
+            if (obj.TryGetComponent(out PlantCell cell)) 
+                AddInAvailable(cell);
+        }
+
+        private void OnTriggerExited(Collider obj)
         {
             if (obj.TryGetComponent(out PlantCell cell))
             {
-                TryInteractWithCell(cell);
+                availableCells.Remove(cell);
+                cell.BecameInteractable -= AddInAvailable;
             }
+        }
+
+        private void Update()
+        {
+            if(interacting)
+                return;
+           
+            if(availableCells.Count > 0) 
+                TryInteractWithCell(availableCells[0]);
+        }
+
+        private void AddInAvailable(PlantCell cell)
+        {
+            if(availableCells.Contains(cell))
+                return;
+            availableCells.Add(cell);
+            cell.BecameInteractable += AddInAvailable;
         }
 
         private void TryInteractWithCell(PlantCell plantCell)
         {
             if(!plantCell.Interactable)
                 return;
+            interacting = true;
             plantCellToInteract = plantCell;
             switch(plantCell.CurrentState)
             {
-                case CellState.Grass:
+                case PlantCellState.Grass:
                     StartPlow();
                     break;
-                case CellState.Plowed:
+                case PlantCellState.Plowed:
                     StartPlant();
                     break;
-                case CellState.Grown:
+                case PlantCellState.Grown:
                     Harvest();
                     break;
-                case CellState.Harvested:
+                case PlantCellState.Harvested:
                     break;
             }
         }
 
         private void StartPlow()
         {
-            itemChanger.Take(ItemType.Plowing);
             playerMovement.Disable();
+            itemChanger.Take(ItemType.Plowing);
             unitActionAnimation.Animate(AnimationType.Plow);
         }
 
         private void StartPlant()
         {
-            itemChanger.Take(ItemType.Planting);
             playerMovement.Disable();
+            itemChanger.Take(ItemType.Planting);
             unitActionAnimation.Animate(AnimationType.Plant);
-        }
-
-        private void Plant()
-        {
-            plantCellToInteract.Plant();
-            unitActionAnimation.Disable();
-            itemChanger.HideIfExist();
-            playerMovement.Activate();
         }
 
         private void Plow()
         {
             plantCellToInteract.Plow();
-            unitActionAnimation.Disable();
-            itemChanger.HideIfExist();
-            
-            if (plantCellToInteract.Interactable)
-                TryInteractWithCell(plantCellToInteract);
-            else
-                playerMovement.Activate();
+            ActivateMovement();
+        }
+
+        private void Plant()
+        {
+            plantCellToInteract.Plant();
+            ActivateMovement();
         }
 
         private void Harvest()
         {
             unitActionAnimation.AnimateHarvest();
             plantCellToInteract.Harvest();
+            interacting = false;
+        }
+
+        private void ActivateMovement()
+        {
+            unitActionAnimation.Disable();
+            itemChanger.HideIfExist();
+            playerMovement.Activate();
+            interacting = false;
         }
     }
 }

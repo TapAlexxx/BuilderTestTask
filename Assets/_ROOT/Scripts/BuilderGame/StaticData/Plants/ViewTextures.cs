@@ -7,7 +7,7 @@ namespace BuilderGame.StaticData.Plants
     [Serializable]
     public class ViewTextures
     {
-        public CellState cellState;
+        public PlantCellState plantCellState;
         public Material Material;
     }
 }

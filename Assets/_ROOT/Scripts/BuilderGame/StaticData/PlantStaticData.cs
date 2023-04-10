@@ -9,8 +9,13 @@ namespace BuilderGame.StaticData
     {
         public PlantType PlantType;
         public GameObject PlantPrefab;
+        
+        [Header("Growing settings"), Space(10)]
         public Vector3 TargetPlantScale;
-        public List<ViewTextures> ViewTextures;
         public Vector2 GrowTime;
+        public GrowType GrowType;
+        
+        [Space(10)]
+        public List<ViewTextures> Textures;
     }
 }

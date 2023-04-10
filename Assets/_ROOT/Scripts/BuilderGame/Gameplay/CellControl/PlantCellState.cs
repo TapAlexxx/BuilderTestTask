@@ -1,6 +1,6 @@
 ﻿namespace BuilderGame.Gameplay.CellControl
 {
-    public enum CellState
+    public enum PlantCellState
     {
         Grass,
         Plowed,

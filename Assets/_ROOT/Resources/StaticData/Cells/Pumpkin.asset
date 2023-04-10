@@ -15,7 +15,9 @@ MonoBehaviour:
   PlantType: 1
   PlantPrefab: {fileID: 5943433350227737845, guid: bd7dd5abd1a8f8e4d975be8f81338c22, type: 3}
   TargetPlantScale: {x: 1, y: 1, z: 1}
-  ViewTextures:
+  GrowTime: {x: 2, y: 4}
+  GrowType: 1
+  Textures:
   - cellState: 0
     Material: {fileID: 2100000, guid: 49ca5b6b9bc21464081bc5be2701aca1, type: 2}
   - cellState: 1
@@ -26,4 +28,3 @@ MonoBehaviour:
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
   - cellState: 4
     Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
-  GrowTime: {x: 2, y: 4}

@@ -72,6 +72,7 @@ namespace BuilderGame.Gameplay.CellControl
                 }
 
                 cellsHarvested = 0;
+                cellsChangedState = 0;
             }
         }
 

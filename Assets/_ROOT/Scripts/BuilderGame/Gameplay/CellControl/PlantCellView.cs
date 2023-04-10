@@ -4,13 +4,13 @@ using UnityEngine;
 namespace BuilderGame.Gameplay.CellControl
 {
     [Serializable]
-    public class CellView
+    public class PlantCellView
     {
         public GameObject View;
         public Renderer ViewRenderer;
-        public CellState СellState;
+        public PlantCellState СellState;
 
-        public void InitializeView(Material material)
+        public void Initialize(Material material)
         {
             ViewRenderer.sharedMaterial = material;
         }

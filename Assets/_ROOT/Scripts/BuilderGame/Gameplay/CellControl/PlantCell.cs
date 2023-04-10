@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using BuilderGame.StaticData;
-using DG.Tweening;
+using BuilderGame.StaticData.Plants;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,63 +9,103 @@ namespace BuilderGame.Gameplay.CellControl
 {
     public class PlantCell : MonoBehaviour
     {
-        [SerializeField] private List<CellView> cellViews;
-        [SerializeField] private Transform plantSpawnPoint;
-
-        private GameObject plant;
+        [SerializeField] private PlantGrower plantGrower;
+        [SerializeField] private CellViewControl cellViewControl;
+        
         private Coroutine growCoroutine;
-        private Vector3 targetPlantScale;
-        private Vector2 growTimeRange;
         private Coroutine resetCoroutine;
-
+        private Vector2 growTimeRange;
+        private GrowType growType;
+        
         public bool Interactable { get; private set; }
-        public CellState CurrentState { get; private set; }
+        public PlantCellState CurrentState { get; private set; }
 
         public event Action ReadeToChangState;
         public event Action Harvested;
+        public event Action<PlantCell> BecameInteractable;
 
 
         public void Initialize(PlantStaticData plantStaticData)
         {
-            foreach (CellView cellView in cellViews)
-            {
-                Material targetMaterial = plantStaticData.ViewTextures.FirstOrDefault(x => x.cellState == cellView.СellState).Material;
-                cellView.InitializeView(targetMaterial);
-            }
-
-            plant = Instantiate(plantStaticData.PlantPrefab, plantSpawnPoint.position, Quaternion.identity);
-            plant.transform.parent = transform;
-            plant.transform.localScale = new Vector3(targetPlantScale.x, 0,targetPlantScale.z);
-            targetPlantScale = plantStaticData.TargetPlantScale;
+            cellViewControl.InitializeCellView(plantStaticData);
+            plantGrower.Initialize(plantStaticData);
+            
             growTimeRange = plantStaticData.GrowTime;
+            growType = plantStaticData.GrowType;
         }
+
+        public void MakeInteractable()
+        {
+            Interactable = true;
+            BecameInteractable?.Invoke(this);
+        }
+
+        private void DisableInteraction() => 
+            Interactable = false;
 
         public void Plow()
         {
             DisableInteraction();
-            SwitchState(CellState.Plowed);
-            ShowView(CellState.Plowed);
+            SwitchState(PlantCellState.Plowed);
+            cellViewControl.Show(PlantCellState.Plowed);
             ReadeToChangState?.Invoke();
         }
 
         public void Plant()
         {
             DisableInteraction();
-            ShowView(CellState.Planted);
+            cellViewControl.Show(PlantCellState.Planted);
             StartGrow();
         }
 
-        private void StartGrow() => 
-            growCoroutine = StartCoroutine(GrowPlant());
+        private void StartGrow()
+        {
+            float growTime = Random.Range(growTimeRange.x, growTimeRange.y);
+            growCoroutine = growType switch
+            {
+                GrowType.Linear => StartCoroutine(GrowLinear(growTime)),
+                GrowType.Bounce => StartCoroutine(GrowBounce(growTime)),
+                _ => growCoroutine
+            };
+        }
+
+        private IEnumerator GrowBounce(float growTime)
+        {
+            yield return new WaitForSeconds(growTime);
+            plantGrower.BounceGrow(Constants.AnimationBounceTime);
+            yield return new WaitForSeconds(Constants.AnimationBounceTime);
+
+            SwitchToGrown();
+            StopCoroutine(growCoroutine);
+        }
+
+        private IEnumerator GrowLinear(float growTime)
+        {
+            plantGrower.LinearGrow(growTime);
+            yield return new WaitForSeconds(growTime);
+
+            SwitchToGrown();
+            StopCoroutine(growCoroutine);
+        }
+
+        private void SwitchToGrown()
+        {
+            SwitchState(PlantCellState.Grown);
+            cellViewControl.Show(PlantCellState.Grown);
+            MakeInteractable();
+        }
 
         public void Harvest()
         {
             DisableInteraction();
-            SwitchState(CellState.Harvested);
-            ShowView(CellState.Harvested);
-            plant.transform.DOScale(Vector3.zero, 0.3f);
+            SwitchState(PlantCellState.Harvested);
+            cellViewControl.Show(PlantCellState.Harvested);
+            plantGrower.Scale(Vector3.zero);
             Harvested?.Invoke();
         }
+
+        private void SwitchState(PlantCellState plantCellState) => 
+            CurrentState = plantCellState;
 
         public void StartResetWithDelay(float delay)
         {
@@ -85,55 +123,12 @@ namespace BuilderGame.Gameplay.CellControl
             Reset();
         }
 
-        private IEnumerator GrowPlant()
-        {
-            float growTime = Random.Range(growTimeRange.x, growTimeRange.y);
-
-            //LinearGrow(growTime);
-            yield return new WaitForSeconds(growTime);
-            
-            BounceGrow();
-            yield return new WaitForSeconds(0.6f);
-
-            SwitchState(CellState.Grown);
-            ShowView(CellState.Grown);
-            MakeInteractable();
-            StopCoroutine(growCoroutine);
-        }
-
-        private void LinearGrow(float growTime)
-        {
-            plant.transform.DOScale(targetPlantScale, growTime);
-        }
-        
-        private void BounceGrow()
-        {
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(plant.transform.DOScale(targetPlantScale * 1.2f, 0.3f));
-            sequence.Append(plant.transform.DOScale(targetPlantScale, 0.3f));
-        }
-
-        public void MakeInteractable() => 
-            Interactable = true;
-
-        private void DisableInteraction() => 
-            Interactable = false;
-
         public void Reset()
         {
-            SwitchState(CellState.Grass);
-            ShowView(CellState.Grass);
-            plant.transform.localScale = new Vector3(targetPlantScale.x, 0,targetPlantScale.z);
+            SwitchState(PlantCellState.Grass);
+            cellViewControl.Show(PlantCellState.Grass);
+            plantGrower.Reset();
             ReadeToChangState?.Invoke();
         }
-
-        private void ShowView(CellState cellState)
-        {
-            foreach (CellView cellView in cellViews)
-                cellView.View.SetActive(cellView.СellState == cellState);
-        }
-
-        private void SwitchState(CellState cellState) => 
-            CurrentState = cellState;
     }
 }
