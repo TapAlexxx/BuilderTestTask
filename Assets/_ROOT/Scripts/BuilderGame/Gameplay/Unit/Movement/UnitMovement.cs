@@ -21,26 +21,17 @@ namespace BuilderGame.Gameplay.Unit.Movement
         
         private Vector3 smoothedVelocity;
         private Vector3 currentVelocity;
-        private bool active;
 
         private void OnValidate()
         {
             characterController = GetComponent<CharacterController>();
         }
 
-        public void SetMovementDirection(Vector3 direction)
-        {
-            if(!active)
-                return;
+        public void SetMovementDirection(Vector3 direction) =>
             Direction = direction;
-        }
 
-        private void Update()
-        {
-            if(!active)
-                return;
+        private void Update() => 
             Move();
-        }
 
         private void Move()
         {
