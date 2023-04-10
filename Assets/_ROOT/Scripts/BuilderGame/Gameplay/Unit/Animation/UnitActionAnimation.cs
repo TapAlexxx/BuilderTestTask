@@ -43,10 +43,16 @@ namespace BuilderGame.Gameplay.Unit.Animation
             animator.SetBool(currentParameter, false);
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+                AnimateHarvest();
+        }
+
         public void AnimateHarvest()
         {
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(transform.DOScale(initialScale * 1.15f, 0.15f));
+            sequence.Append(transform.DOScale(initialScale * 1.3f, 0.15f));
             sequence.Append(transform.DOScale(initialScale, 0.2f));
         }
     }
