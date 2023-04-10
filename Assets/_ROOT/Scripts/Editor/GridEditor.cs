@@ -1,8 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Grid = BuilderGame.Gameplay.Tests.Grid;
+using Grid = BuilderGame.Gameplay.CellControl.Grid;
 
-namespace Editor
+namespace _ROOT.Scripts.Editor
 {
     [CustomEditor(typeof(Grid))]
     public class GridEditor : UnityEditor.Editor
@@ -15,6 +15,8 @@ namespace Editor
             {
                 grid.GenerateGrid();
             }
+            if (GUILayout.Button("HandClear"))
+                grid.Clear();
         }
     }
 }
