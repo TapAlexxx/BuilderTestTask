@@ -7,13 +7,12 @@ namespace BuilderGame.Gameplay.Unit.Rotation
         [SerializeField]
         private float rotationSpeed;
         private Vector3 direction = Vector3.zero;
-        
-        public void SetRotationDirection(Vector3 direction)
-        {
+
+        public void SetRotationDirection(Vector3 direction) => 
             this.direction = direction;
-        }
-        
-        private void Update() => Rotate();
+
+        private void Update() => 
+            Rotate();
 
         private void Rotate()
         {

@@ -6,11 +6,11 @@ namespace BuilderGame.Gameplay.Unit.Animation
 {
     public class UnitActionAnimation : MonoBehaviour
     {
-        [SerializeField]
-        private Animator animator;
+        [SerializeField] private Animator animator;
 
         private readonly int plowParameter = Animator.StringToHash("Plow");
         private readonly int plantParameter = Animator.StringToHash("Plant");
+        
         private int currentParameter;
         private Vector3 initialScale;
 
@@ -41,12 +41,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
         public void Disable()
         {
             animator.SetBool(currentParameter, false);
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-                AnimateHarvest();
         }
 
         public void AnimateHarvest()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BuilderGame.Gameplay.CellControl;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,13 +10,42 @@ namespace BuilderGame.Gameplay.Player
     public class ItemChanger : MonoBehaviour
     {
         [SerializeField] private List<Item> items;
+        [SerializeField] private UnitPlower unitPlower;
+        [SerializeField] private UnitPlanter unitPlanter;
         
         private Item currentItem;
 
+        private void OnValidate()
+        {
+            unitPlower = GetComponentInChildren<UnitPlower>();
+            unitPlanter = GetComponentInChildren<UnitPlanter>();
+        }
+        
         private void Start()
         {
             currentItem = null;
+
+            unitPlower.StartedInteract += TakePlowing;
+            unitPlanter.StartedInteract += TakePlanting;
+            
+            unitPlower.EndedInteract += HideIfExist;
+            unitPlanter.EndedInteract += HideIfExist;
         }
+
+        private void OnDestroy()
+        {
+            unitPlower.StartedInteract -= TakePlowing;
+            unitPlanter.StartedInteract -= TakePlanting;
+
+            unitPlower.EndedInteract -= HideIfExist;
+            unitPlanter.EndedInteract -= HideIfExist;
+        }
+
+        private void TakePlowing() => 
+            Take(ItemType.Plowing);
+
+        private void TakePlanting() => 
+            Take(ItemType.Planting);
 
         public void Take(ItemType itemType)
         {

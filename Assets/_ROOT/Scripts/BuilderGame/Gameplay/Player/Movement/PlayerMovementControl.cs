@@ -1,4 +1,5 @@
-﻿using BuilderGame.Gameplay.Unit.Movement;
+﻿using System;
+using BuilderGame.Gameplay.Unit.Movement;
 using BuilderGame.Infrastructure.Services.Input;
 using UnityEngine;
 using Zenject;
@@ -26,6 +27,11 @@ namespace BuilderGame.Gameplay.Player.Movement
             this.inputProvider = inputProvider;
         }
 
+        private void Awake()
+        {
+            Activate();
+        }
+
         private void Start()
         {
             mainCamera = Camera.main;
@@ -47,8 +53,8 @@ namespace BuilderGame.Gameplay.Player.Movement
 
         public void Disable()
         {
-            unitMovement.SetMovementDirection(Vector3.zero);
             active = false;
+            unitMovement.SetMovementDirection(Vector3.zero);
         }
 
         public void Activate()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BuilderGame.Gameplay.Unit.Movement
 {
@@ -27,13 +28,34 @@ namespace BuilderGame.Gameplay.Unit.Movement
             characterController = GetComponent<CharacterController>();
         }
 
+        private void Awake()
+        {
+            Activate();
+        }
+
         public void SetMovementDirection(Vector3 direction)
         {
+            if(!active)
+                return;
             Direction = direction;
+        }
+        
+        public void Disable()
+        {
+            active = false;
+            SetMovementDirection(Vector3.zero);
+            characterController.Move(Vector3.zero);
+        }
+
+        public void Activate()
+        {
+            active = true;
         }
         
         private void Update()
         {
+            if(!active)
+                return;
             Move();
         }
 
