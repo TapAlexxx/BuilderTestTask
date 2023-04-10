@@ -18,11 +18,13 @@ namespace BuilderGame.Gameplay.CellControl
         private Coroutine growCoroutine;
         private Vector3 targetPlantScale;
         private Vector2 growTimeRange;
+        private Coroutine resetCoroutine;
 
         public bool Interactable { get; private set; }
         public CellState CurrentState { get; private set; }
 
         public event Action ReadeToChangState;
+        public event Action Harvested;
 
 
         public void Initialize(PlantStaticData plantStaticData)
@@ -64,6 +66,23 @@ namespace BuilderGame.Gameplay.CellControl
             SwitchState(CellState.Harvested);
             ShowView(CellState.Harvested);
             plant.transform.DOScale(Vector3.zero, 0.3f);
+            Harvested?.Invoke();
+        }
+
+        public void StartResetWithDelay(float delay)
+        {
+            if (resetCoroutine != null)
+            {
+                StopCoroutine(resetCoroutine);
+                resetCoroutine = null;
+            }
+            resetCoroutine = StartCoroutine(ResetWithDelay(delay));
+        }
+
+        private IEnumerator ResetWithDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Reset();
         }
 
         private IEnumerator GrowPlant()
@@ -77,6 +96,7 @@ namespace BuilderGame.Gameplay.CellControl
             yield return new WaitForSeconds(0.6f);
 
             SwitchState(CellState.Grown);
+            ShowView(CellState.Grown);
             MakeInteractable();
             StopCoroutine(growCoroutine);
         }

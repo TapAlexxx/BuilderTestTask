@@ -2,6 +2,7 @@
 {
     public enum PlantType
     {
-        Wheat
+        Wheat,
+        Pumpkin
     }
 }

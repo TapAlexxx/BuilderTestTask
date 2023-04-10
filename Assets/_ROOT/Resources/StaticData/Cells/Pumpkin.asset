@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6652fe123066412896e55aa1004ac5fe, type: 3}
-  m_Name: Wheat
+  m_Name: Pumpkin
   m_EditorClassIdentifier: 
-  PlantType: 0
-  PlantPrefab: {fileID: 7865914051683017597, guid: e84bf57287896bd409a18c089e8813c1, type: 3}
-  TargetPlantScale: {x: 0.56, y: 1, z: 0.66}
+  PlantType: 1
+  PlantPrefab: {fileID: 5943433350227737845, guid: bd7dd5abd1a8f8e4d975be8f81338c22, type: 3}
+  TargetPlantScale: {x: 1, y: 1, z: 1}
   ViewTextures:
   - cellState: 0
     Material: {fileID: 2100000, guid: 49ca5b6b9bc21464081bc5be2701aca1, type: 2}
