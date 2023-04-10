@@ -6,15 +6,13 @@ namespace BuilderGame.Gameplay.Unit.Movement
     [RequireComponent(typeof(CharacterController))]
     public class UnitMovement : MonoBehaviour
     {
-        [Header("Settings")]
+        [Header("Settings")] 
         public float Speed;
         
-        [SerializeField] 
-        private float smoothness = 0.1f;
+        [SerializeField] private float smoothness = 0.1f;
         
         [Header("References")]
-        [SerializeField]
-        private CharacterController characterController;
+        [SerializeField] private CharacterController characterController;
 
         public Vector3 Direction { get; private set; } = Vector3.zero;
         public Vector3 TargetVelocity { get; private set; }

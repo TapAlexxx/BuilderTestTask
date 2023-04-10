@@ -16,11 +16,11 @@ namespace BuilderGame.Gameplay.CellControl
             unitActionAnimation = GetComponentInChildren<UnitActionAnimation>();
         }
 
-        public void Harvest(PlantCell cell)
+        public void Harvest(PlantCell plantCell)
         {
             StartedInteract?.Invoke();
             unitActionAnimation.AnimateHarvest();
-            cell.Harvest();
+            plantCell.Harvest();
             EndedInteract?.Invoke();
         }
 
