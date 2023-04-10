@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: Wheat
   m_EditorClassIdentifier: 
   PlantType: 0
-  PlantPrefab: {fileID: 0}
-  ViewTextures: []
+  PlantPrefab: {fileID: 7865914051683017597, guid: e84bf57287896bd409a18c089e8813c1, type: 3}
+  TargetPlantScale: {x: 0.56, y: 1, z: 0.66}
+  ViewTextures:
+  - cellState: 0
+    Material: {fileID: 2100000, guid: 49ca5b6b9bc21464081bc5be2701aca1, type: 2}
+  - cellState: 1
+    Material: {fileID: 2100000, guid: ba828f98c36e04b45aed6d9bbb51a599, type: 2}
+  - cellState: 2
+    Material: {fileID: 2100000, guid: 04bac79c76fe76d4581b1cd4e1f62d2b, type: 2}
+  - cellState: 4
+    Material: {fileID: 2100000, guid: 9ae1d73fdebd4f04f971f7144044b8c3, type: 2}
+  GrowTime: {x: 2, y: 4}
