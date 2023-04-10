@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Tests
+namespace BuilderGame.Gameplay.CellControl
 {
     public class TriggerObserver : MonoBehaviour
     {
