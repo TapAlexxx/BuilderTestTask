@@ -7,7 +7,6 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 {
     public class UnitPlanter : Interactable
     {
-        [SerializeField] private UnitActionAnimation unitActionAnimation;
         [SerializeField] private AnimationEventCallbacks animationEventCallbacks;
         
         private PlantCell plantCellToInteract;
@@ -17,7 +16,6 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 
         private void OnValidate()
         {
-            unitActionAnimation = GetComponentInChildren<UnitActionAnimation>();
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
         }
 
@@ -25,7 +23,6 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
         {
             StartedInteract?.Invoke();
             plantCellToInteract = plantCell;
-            unitActionAnimation.Animate(AnimationType.Plant);
         }
 
         private void Start() => 
@@ -37,7 +34,6 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
         private void Plant()
         {
             plantCellToInteract.Plant();
-            unitActionAnimation.Disable();
             EndedInteract?.Invoke();
         }
     }
