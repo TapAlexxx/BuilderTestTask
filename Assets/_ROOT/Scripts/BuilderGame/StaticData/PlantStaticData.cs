@@ -15,7 +15,7 @@ namespace BuilderGame.StaticData
         public Vector2 GrowTime;
         public GrowType GrowType;
         
-        [Space(10)]
-        public List<ViewTextures> Textures;
+        [Header("PlantCell settings"), Space(10)]
+        public List<ViewConfigs> Textures;
     }
 }
