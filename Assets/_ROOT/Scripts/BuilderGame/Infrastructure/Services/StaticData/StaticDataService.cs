@@ -8,7 +8,7 @@ namespace BuilderGame.Infrastructure.Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private const string GameConfigPath = "StaticData/Cells";
+        private const string GameConfigPath = "StaticData/Plants";
         
         private List<PlantStaticData> plantStaticData;
 
