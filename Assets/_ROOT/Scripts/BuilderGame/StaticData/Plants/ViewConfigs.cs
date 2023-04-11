@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BuilderGame.StaticData.Plants
 {
     [Serializable]
-    public class ViewTextures
+    public class ViewConfigs
     {
         public PlantCellState plantCellState;
         public Material Material;
