@@ -83,6 +83,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &474383163787627655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8936730506448685812}
+  m_Layer: 0
+  m_Name: FX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8936730506448685812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474383163787627655}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8474958055367160031}
+  m_Father: {fileID: 2040337999702110315}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655506459525667339
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +209,7 @@ GameObject:
   - component: {fileID: 4238050490279074884}
   - component: {fileID: 1607063328241965853}
   - component: {fileID: 2676834911141272823}
+  - component: {fileID: 6373830604829952681}
   m_Layer: 0
   m_Name: GrownView
   m_TagString: Untagged
@@ -249,6 +282,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6373830604829952681
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809534548600814940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &892029545266299025
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +638,7 @@ GameObject:
   - component: {fileID: 6432477128382074908}
   - component: {fileID: 1065241069547633644}
   - component: {fileID: 2507895504291850457}
+  - component: {fileID: 6988769417477187208}
   m_Layer: 0
   m_Name: PlantedView
   m_TagString: Untagged
@@ -665,6 +712,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6988769417477187208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887128173584320104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2011484274347026634
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +819,7 @@ GameObject:
   - component: {fileID: 2040337998673678313}
   - component: {fileID: 2040337998673678319}
   - component: {fileID: 2040337998673678312}
+  - component: {fileID: 5428008617332565456}
   m_Layer: 0
   m_Name: HarvestedView
   m_TagString: Untagged
@@ -863,6 +924,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5428008617332565456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040337998673678314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2040337999619568421
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +948,7 @@ GameObject:
   - component: {fileID: 2040337999619568420}
   - component: {fileID: 2040337999619568426}
   - component: {fileID: 2040337999619568427}
+  - component: {fileID: 1653924061315298417}
   m_Layer: 0
   m_Name: PlowedView
   m_TagString: Untagged
@@ -946,6 +1021,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1653924061315298417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040337999619568421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2040337999702110308
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +1068,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4722614633464797475}
+  - {fileID: 8936730506448685812}
   - {fileID: 8493973019440128613}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1064,6 +1153,7 @@ MonoBehaviour:
   - View: {fileID: 2040337998673678314}
     ViewRenderer: {fileID: 2040337998673678312}
     "\u0421ellState": 4
+  plowParticle: {fileID: 8828364338833107341}
 --- !u!1 &2040338000102107193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1165,7 @@ GameObject:
   - component: {fileID: 2040338000102107192}
   - component: {fileID: 2040338000102107198}
   - component: {fileID: 2040338000102107199}
+  - component: {fileID: 1812481385639837999}
   m_Layer: 0
   m_Name: GrassView
   m_TagString: Untagged
@@ -1147,6 +1238,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1812481385639837999
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040338000102107193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2066050561530580898
 GameObject:
   m_ObjectHideFlags: 0
@@ -3287,7 +3391,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2040337999702110315}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8976324898294038379
 GameObject:
@@ -3372,3 +3476,70 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &2138834255214511158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8936730506448685812}
+    m_Modifications:
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823810020953298840, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+      propertyPath: m_Name
+      value: Plowed
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+--- !u!4 &8474958055367160031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7508541948257449193, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+  m_PrefabInstance: {fileID: 2138834255214511158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8828364338833107341 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7433768407719226811, guid: e876f518acdfbf147bc8258e45d9b2ad, type: 3}
+  m_PrefabInstance: {fileID: 2138834255214511158}
+  m_PrefabAsset: {fileID: 0}

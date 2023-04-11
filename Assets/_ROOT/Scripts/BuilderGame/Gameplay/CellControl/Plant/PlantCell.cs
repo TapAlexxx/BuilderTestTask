@@ -42,6 +42,7 @@ namespace BuilderGame.Gameplay.CellControl
 
         public void Plow()
         {
+            cellViewControl.AnimatePlow();
             DisableInteraction();
             SwitchState(PlantCellState.Plowed);
             cellViewControl.Show(PlantCellState.Plowed);
