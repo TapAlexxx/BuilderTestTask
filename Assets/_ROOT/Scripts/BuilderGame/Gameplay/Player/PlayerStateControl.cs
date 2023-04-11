@@ -8,20 +8,20 @@ namespace BuilderGame.Gameplay.Player
 {
     public class PlayerStateControl : MonoBehaviour
     {
-        [SerializeField] private List<Interactable> interactables;
+        [SerializeField] private List<CellInteractable> interactables;
         [SerializeField] private PlayerMovementControl playerMovementControl;
 
         public bool Interacting { get; private set; }
 
         private void OnValidate()
         {
-            interactables = GetComponentsInChildren<Interactable>().ToList();
+            interactables = GetComponentsInChildren<CellInteractable>().ToList();
             playerMovementControl = GetComponentInChildren<PlayerMovementControl>();
         }
         
         private void Start()
         {
-            foreach (Interactable interactable in interactables)
+            foreach (CellInteractable interactable in interactables)
             {
                 interactable.StartedInteract += OnStartedInteract;
                 interactable.EndedInteract   += OnEndedInteract;
@@ -30,7 +30,7 @@ namespace BuilderGame.Gameplay.Player
 
         private void OnDestroy()
         {
-            foreach (Interactable interactable in interactables)
+            foreach (CellInteractable interactable in interactables)
             {
                 interactable.StartedInteract -= OnStartedInteract;
                 interactable.EndedInteract -= OnEndedInteract;
