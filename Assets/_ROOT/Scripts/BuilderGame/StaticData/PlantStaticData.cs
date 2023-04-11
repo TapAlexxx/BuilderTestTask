@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BuilderGame.Gameplay.Plants;
 using BuilderGame.StaticData.Plants;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace BuilderGame.StaticData
     public class PlantStaticData : ScriptableObject
     {
         public PlantType PlantType;
-        public GameObject PlantPrefab;
+        public Plant PlantPrefab;
         
         [Header("Growing settings"), Space(10)]
         public Vector3 TargetPlantScale;

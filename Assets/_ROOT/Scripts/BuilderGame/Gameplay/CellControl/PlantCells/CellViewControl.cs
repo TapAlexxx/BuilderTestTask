@@ -3,7 +3,7 @@ using System.Linq;
 using BuilderGame.StaticData;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl.Plant
+namespace BuilderGame.Gameplay.CellControl.PlantCells
 {
     public class CellViewControl : MonoBehaviour
     {

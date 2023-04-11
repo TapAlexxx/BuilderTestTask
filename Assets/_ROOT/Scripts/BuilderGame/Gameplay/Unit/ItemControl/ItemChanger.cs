@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BuilderGame.Gameplay.Unit.CellInteraction.Plant;
+using BuilderGame.Gameplay.Unit.CellInteraction;
 using DG.Tweening;
 using UnityEngine;
 

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using BuilderGame.Gameplay.CellControl.Plant;
+using System.Linq;
+using BuilderGame.Gameplay.CellControl.PlantCells;
 using BuilderGame.Gameplay.Player;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
+namespace BuilderGame.Gameplay.Unit.CellInteraction
 {
     public class UnitPlantCellInteractor : MonoBehaviour
     {
@@ -13,7 +14,7 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
         [SerializeField] private UnitHarvester unitHarvester;
         [SerializeField] private PlayerStateControl playerStateControl;
         
-        private List<PlantCell> availableCells;
+        private List<CellControl.PlantCells.PlantCell> availableCells;
 
         private void OnValidate()
         {
@@ -41,8 +42,8 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
             if(playerStateControl.Interacting)
                 return;
            
-            if(availableCells.Count > 0) 
-                TryInteractWithCell(availableCells[0]);
+            if(availableCells.FirstOrDefault(x => x.Interactable)) 
+                TryInteractWithCell(availableCells.FirstOrDefault(x => x.Interactable));
         }
 
         private void Initialize() => 
@@ -50,17 +51,16 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 
         private void TryAddPlantCell(Collider obj)
         {
-            if (obj.TryGetComponent(out PlantCell cell)) 
+            if (obj.TryGetComponent(out PlantCell cell))
+            {
                 AddInAvailable(cell);
+            }
         }
 
         private void TryRemovePlantCell(Collider obj)
         {
-            if (obj.TryGetComponent(out PlantCell cell))
-            {
-                availableCells.Remove(cell);
-                cell.BecameInteractable -= AddInAvailable;
-            }
+            if (obj.TryGetComponent(out PlantCell cell)) 
+                RemoveFromAvailable(cell);
         }
 
         private void AddInAvailable(PlantCell cell)
@@ -71,10 +71,17 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
             cell.BecameInteractable += AddInAvailable;
         }
 
-        private void TryInteractWithCell(PlantCell plantCell)
+        private void RemoveFromAvailable(CellControl.PlantCells.PlantCell cell)
         {
-            if(!plantCell.Interactable)
+            availableCells.Remove(cell);
+            cell.BecameInteractable -= AddInAvailable;
+        }
+
+        private void TryInteractWithCell(CellControl.PlantCells.PlantCell plantCell)
+        {
+            if(plantCell == null || !plantCell.Interactable)
                 return;
+            
             switch(plantCell.CurrentState)
             {
                 case PlantCellState.Grass:
@@ -103,7 +110,7 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 
         private void UnsubscribeFromAvailableCells()
         {
-            foreach (PlantCell plantCell in availableCells)
+            foreach (CellControl.PlantCells.PlantCell plantCell in availableCells)
                 plantCell.BecameInteractable -= AddInAvailable;
         }
     }

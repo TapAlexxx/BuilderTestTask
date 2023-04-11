@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
+using BuilderGame.Gameplay.Plants;
 using BuilderGame.StaticData;
 using BuilderGame.StaticData.Plants;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace BuilderGame.Gameplay.CellControl.Plant
+namespace BuilderGame.Gameplay.CellControl.PlantCells
 {
     public class PlantCell : MonoBehaviour
     {
@@ -61,7 +62,6 @@ namespace BuilderGame.Gameplay.CellControl.Plant
             DisableInteraction();
             SwitchState(PlantCellState.Harvested);
             cellViewControl.Show(PlantCellState.Harvested);
-            plantGrower.Scale(Vector3.zero);
             Harvested?.Invoke();
         }
 
@@ -131,5 +131,8 @@ namespace BuilderGame.Gameplay.CellControl.Plant
             yield return new WaitForSeconds(delay);
             Reset();
         }
+
+        public Plant GetPlant() => 
+            plantGrower.Plant;
     }
 }

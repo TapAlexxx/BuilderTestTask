@@ -1,5 +1,5 @@
 ﻿using System;
-using BuilderGame.Gameplay.CellControl.Plant;
+using BuilderGame.Gameplay.CellControl.PlantCells;
 using UnityEngine;
 
 namespace BuilderGame.StaticData.Plants

@@ -1,15 +1,14 @@
 ﻿using System;
-using BuilderGame.Gameplay.CellControl.Plant;
 using BuilderGame.Gameplay.Unit.Animation;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
+namespace BuilderGame.Gameplay.Unit.CellInteraction
 {
-    public class UnitPlower : Interactable
+    public class UnitPlanter : Interactable
     {
         [SerializeField] private AnimationEventCallbacks animationEventCallbacks;
-
-        private PlantCell plantCellToInteract;
+        
+        private CellControl.PlantCells.PlantCell plantCellToInteract;
 
         public override event Action StartedInteract;
         public override event Action EndedInteract;
@@ -19,21 +18,21 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
         }
 
-        public void StartPlow(PlantCell plantCell)
+        public void StartPlant(CellControl.PlantCells.PlantCell plantCell)
         {
             StartedInteract?.Invoke();
             plantCellToInteract = plantCell;
         }
 
         private void Start() => 
-            animationEventCallbacks.Plowed += Plow;
+            animationEventCallbacks.Planted += Plant;
 
         private void OnDestroy() => 
-            animationEventCallbacks.Plowed -= Plow;
+            animationEventCallbacks.Planted -= Plant;
 
-        private void Plow()
+        private void Plant()
         {
-            plantCellToInteract.Plow();
+            plantCellToInteract.Plant();
             EndedInteract?.Invoke();
         }
     }

@@ -1,4 +1,4 @@
-﻿using BuilderGame.Gameplay.CellControl.Plant;
+﻿using BuilderGame.Gameplay.CellControl.PlantCells;
 using UnityEditor;
 using UnityEngine;
 

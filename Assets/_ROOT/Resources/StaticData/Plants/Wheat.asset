@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wheat
   m_EditorClassIdentifier: 
   PlantType: 0
-  PlantPrefab: {fileID: 7865914051683017597, guid: e84bf57287896bd409a18c089e8813c1, type: 3}
+  PlantPrefab: {fileID: 8565065920593422289, guid: e84bf57287896bd409a18c089e8813c1, type: 3}
   TargetPlantScale: {x: 0.56, y: 1, z: 0.66}
   GrowTime: {x: 2, y: 4}
   GrowType: 0

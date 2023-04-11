@@ -1,5 +1,5 @@
 ﻿using System;
-using BuilderGame.Gameplay.Unit.CellInteraction.Plant;
+using BuilderGame.Gameplay.Unit.CellInteraction;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,7 +10,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
         [SerializeField] private Animator animator;
         [SerializeField] private UnitPlower unitPlower;
         [SerializeField] private UnitPlanter unitPlanter;
-        [SerializeField] private UnitHarvester unitHarvester;
         
         private readonly int plowParameter = Animator.StringToHash("Plow");
         private readonly int plantParameter = Animator.StringToHash("Plant");
@@ -23,7 +22,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
             animator = GetComponentInChildren<Animator>();
             unitPlower = GetComponentInChildren<UnitPlower>();
             unitPlanter = GetComponentInChildren<UnitPlanter>();
-            unitHarvester = GetComponentInChildren<UnitHarvester>();
         }
 
         private void Start()
@@ -32,7 +30,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
 
             unitPlower.StartedInteract += AnimatePlowing;
             unitPlanter.StartedInteract += AnimatePlanting;
-            unitHarvester.StartedInteract += AnimateHarvest;
             
             unitPlower.EndedInteract += Disable;
             unitPlanter.EndedInteract += Disable;
@@ -42,7 +39,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
         {
             unitPlower.StartedInteract -= AnimatePlowing;
             unitPlanter.StartedInteract -= AnimatePlanting;
-            unitHarvester.StartedInteract -= AnimateHarvest;
 
             unitPlower.EndedInteract -= Disable;
             unitPlanter.EndedInteract -= Disable;
@@ -53,13 +49,6 @@ namespace BuilderGame.Gameplay.Unit.Animation
 
         private void AnimatePlowing() => 
             Animate(AnimationType.Plow);
-
-        private void AnimateHarvest()
-        {
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(transform.DOScale(initialScale * 1.3f, 0.15f));
-            sequence.Append(transform.DOScale(initialScale, 0.2f));
-        }
 
         private void Animate(AnimationType animationType)
         {

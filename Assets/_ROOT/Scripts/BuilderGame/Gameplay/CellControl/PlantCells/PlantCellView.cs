@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl.Plant
+namespace BuilderGame.Gameplay.CellControl.PlantCells
 {
     [Serializable]
     public class PlantCellView

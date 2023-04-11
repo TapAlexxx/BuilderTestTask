@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pumpkin
   m_EditorClassIdentifier: 
   PlantType: 1
-  PlantPrefab: {fileID: 5943433350227737845, guid: bd7dd5abd1a8f8e4d975be8f81338c22, type: 3}
+  PlantPrefab: {fileID: 574941413076930331, guid: bd7dd5abd1a8f8e4d975be8f81338c22, type: 3}
   TargetPlantScale: {x: 1, y: 1, z: 1}
   GrowTime: {x: 2, y: 4}
   GrowType: 1
