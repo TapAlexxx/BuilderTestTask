@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BuilderGame.StaticData;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.CellControl.Plant
 {
     public class CellViewControl : MonoBehaviour
     {

@@ -5,7 +5,7 @@ using BuilderGame.StaticData.Plants;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.CellControl.Plant
 {
     public class PlantCell : MonoBehaviour
     {

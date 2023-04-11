@@ -1,10 +1,9 @@
 ﻿using System;
-using BuilderGame.Gameplay.Player;
+using BuilderGame.Gameplay.CellControl.Plant;
 using BuilderGame.Gameplay.Unit.Animation;
-using BuilderGame.Gameplay.Unit.Movement;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 {
     public class UnitPlanter : Interactable
     {

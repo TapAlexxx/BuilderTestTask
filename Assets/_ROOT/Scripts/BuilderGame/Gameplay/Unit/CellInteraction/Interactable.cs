@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.Unit.CellInteraction
 {
     public abstract class Interactable : MonoBehaviour 
     {

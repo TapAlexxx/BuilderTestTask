@@ -1,4 +1,4 @@
-﻿namespace BuilderGame.Gameplay.CellControl
+﻿namespace BuilderGame.Gameplay.CellControl.Plant
 {
     public enum PlantCellState
     {

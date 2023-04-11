@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Zenject;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.CellControl.Plant
 {
     public class PlantGrid : MonoBehaviour
     {

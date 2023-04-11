@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.CellControl.Plant
 {
     public class PlantGrower : MonoBehaviour
     {

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BuilderGame.Gameplay.Player.Movement;
-using BuilderGame.Gameplay.Unit.Movement;
-using BuilderGame.Gameplay.Unit.Rotation;
+using BuilderGame.Gameplay.Unit.CellInteraction;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.Player
 {
     public class PlayerStateControl : MonoBehaviour
     {

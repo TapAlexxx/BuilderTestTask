@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using BuilderGame.Gameplay.Unit.Movement;
-using BuilderGame.Gameplay.Unit.Rotation;
+using BuilderGame.Gameplay.CellControl.Plant;
+using BuilderGame.Gameplay.Player;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 {
     public class UnitPlantCellInteractor : MonoBehaviour
     {

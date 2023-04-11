@@ -1,4 +1,4 @@
-﻿namespace BuilderGame.Gameplay.Player
+﻿namespace BuilderGame.Gameplay.Unit.ItemControl
 {
     public enum ItemType
     {

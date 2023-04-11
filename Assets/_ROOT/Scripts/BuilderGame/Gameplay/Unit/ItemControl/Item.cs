@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Player
+namespace BuilderGame.Gameplay.Unit.ItemControl
 {
     [Serializable]
     public class Item

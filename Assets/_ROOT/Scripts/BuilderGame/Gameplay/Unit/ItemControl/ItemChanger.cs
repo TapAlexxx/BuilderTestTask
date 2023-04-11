@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BuilderGame.Gameplay.CellControl;
+using BuilderGame.Gameplay.Unit.CellInteraction.Plant;
 using DG.Tweening;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.Player
+namespace BuilderGame.Gameplay.Unit.ItemControl
 {
     public class ItemChanger : MonoBehaviour
     {

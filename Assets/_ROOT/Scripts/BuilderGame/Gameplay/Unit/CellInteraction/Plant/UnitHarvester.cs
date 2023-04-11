@@ -1,8 +1,9 @@
 ﻿using System;
+using BuilderGame.Gameplay.CellControl.Plant;
 using BuilderGame.Gameplay.Unit.Animation;
 using UnityEngine;
 
-namespace BuilderGame.Gameplay.CellControl
+namespace BuilderGame.Gameplay.Unit.CellInteraction.Plant
 {
     public class UnitHarvester : Interactable
     {
