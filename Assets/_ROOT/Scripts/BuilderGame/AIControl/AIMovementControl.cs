@@ -12,14 +12,12 @@ namespace BuilderGame.AIControl
         [SerializeField] private PlantGrid grid;
 
         private Transform currentTarget;
-        private bool isMoving;
 
         private void OnValidate()
         {
             unitMovement = GetComponentInChildren<UnitMovement>();
         }
-
-
+        
         public void Initialize(PlantGrid plantGrid)
         {
             grid = plantGrid;
@@ -27,11 +25,16 @@ namespace BuilderGame.AIControl
 
         private void Update()
         {
-            if(currentTarget == null)
-                currentTarget = grid.TryGetHarvestable(out PlantCell plantCell) 
-                    ? plantCell.transform 
-                    : waitPosition;
-            Move();
+            if(currentTarget == null && grid.TryGetHarvestable(out PlantCell plantCell))
+                currentTarget = plantCell.transform;
+            else
+            {
+                if(currentTarget == null)
+                    currentTarget = waitPosition;
+            }
+
+            if(currentTarget != null)
+                Move();
         }
 
         private void Stop()
@@ -44,10 +47,10 @@ namespace BuilderGame.AIControl
         {
             if (Vector3.Distance(currentTarget.position, transform.position) <= 0.1f)
             {
-                isMoving = false;
+                Stop();
                 return;
             }
-            isMoving = true;
+
             Vector3 direction = GetMovementDirection();
             unitMovement.SetMovementDirection(direction);
         }
