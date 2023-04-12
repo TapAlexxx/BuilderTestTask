@@ -109,6 +109,28 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
                 cell.MakeInteractable();
         }
 
+        private void SubscribeOnCellsEvents()
+        {
+            foreach (PlantCell cell in cells)
+            {
+                cell.ReadeToChangState += OnReadyToChangeState;
+                cell.Grown += OnCellGrown;
+                cell.Harvested += OnHarvested;
+                cellsToChangedState++;
+            }
+        }
+
+        private void UnsubscribeOnCellsEvents()
+        {
+            foreach (PlantCell cell in cells)
+            {
+                cell.ReadeToChangState -= OnReadyToChangeState;
+                cell.Grown -= OnCellGrown;
+                cell.Harvested -= OnHarvested;
+            }
+        }
+
+#if UNITY_EDITOR
         public void GenerateGrid()
         {
             ClearGrid();
@@ -131,26 +153,6 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
                 DestroyImmediate(child.gameObject);
             cells.Clear();
         }
-
-        private void SubscribeOnCellsEvents()
-        {
-            foreach (PlantCell cell in cells)
-            {
-                cell.ReadeToChangState += OnReadyToChangeState;
-                cell.Grown += OnCellGrown;
-                cell.Harvested += OnHarvested;
-                cellsToChangedState++;
-            }
-        }
-
-        private void UnsubscribeOnCellsEvents()
-        {
-            foreach (PlantCell cell in cells)
-            {
-                cell.ReadeToChangState -= OnReadyToChangeState;
-                cell.Grown -= OnCellGrown;
-                cell.Harvested -= OnHarvested;
-            }
-        }
+#endif
     }
 }
