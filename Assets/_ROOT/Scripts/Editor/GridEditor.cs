@@ -16,7 +16,7 @@ namespace _ROOT.Scripts.Editor
                 plantGrid.GenerateGrid();
             }
             if (GUILayout.Button("HandClear"))
-                plantGrid.Clear();
+                plantGrid.ClearGrid();
         }
     }
 }

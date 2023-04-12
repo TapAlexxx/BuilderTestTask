@@ -22,7 +22,8 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
         public PlantCellState CurrentState { get; private set; }
 
         public event Action ReadeToChangState;
-        public event Action Harvested;
+        public event Action<PlantCell> Harvested;
+        public event Action<PlantCell> Grown;
         public event Action<PlantCell> BecameInteractable;
 
 
@@ -62,7 +63,7 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
             DisableInteraction();
             SwitchState(PlantCellState.Harvested);
             cellViewControl.Show(PlantCellState.Harvested);
-            Harvested?.Invoke();
+            Harvested?.Invoke(this);
         }
 
         public void StartResetWithDelay(float delay)
@@ -120,6 +121,7 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
         {
             SwitchState(PlantCellState.Grown);
             cellViewControl.Show(PlantCellState.Grown);
+            Grown?.Invoke(this);
             MakeInteractable();
         }
 

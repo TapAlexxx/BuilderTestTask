@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BuilderGame.Infrastructure.Services.StaticData;
 using BuilderGame.StaticData;
 using BuilderGame.StaticData.Plants;
@@ -20,6 +22,8 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
         private int cellsChangedState;
         private int cellsHarvested;
         private int cellsToChangedState;
+        private List<PlantCell> harvestableCells;
+
 
         [Inject]
         public void Construct(IStaticDataService staticDataService)
@@ -28,9 +32,86 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
             Initialize();
         }
 
+        private void Initialize()
+        {
+            PlantStaticData plantStaticData = staticDataService.GetPlantStaticData(plantType);
+            foreach (PlantCell plantCell in cells)
+            {
+                plantCell.Initialize(plantStaticData);
+                plantCell.Reset();
+                MakeCellsInteractable();
+            }
+
+            harvestableCells = new List<PlantCell>();
+        }
+
+        public bool TryGetHarvestable(out PlantCell plantCell)
+        {
+            plantCell = harvestableCells.FirstOrDefault(x => x.Interactable);
+            return plantCell != null;
+        }
+
+        private void Start()
+        {
+            cellsChangedState = 0;
+            cellsToChangedState = 0;
+
+            SubscribeOnCellsEvents();
+        }
+
+        private void OnDestroy() => 
+            UnsubscribeOnCellsEvents();
+
+        private void OnCellGrown(PlantCell plantCell) => 
+            harvestableCells.Add(plantCell);
+
+        private void OnHarvested(PlantCell plantCell)
+        {
+            harvestableCells.Remove(plantCell);
+            cellsHarvested++;
+            TryReset();
+        }
+
+        private void OnReadyToChangeState()
+        {
+            cellsChangedState++;
+            TrySwitchState();
+        }
+
+        private void TrySwitchState()
+        {
+            bool ableToSwitchState = cellsChangedState == cellsToChangedState;
+            if (ableToSwitchState)
+            {
+                cellsChangedState = 0;
+                MakeCellsInteractable();
+            }
+        }
+
+        private void TryReset()
+        {
+            bool ableToReset = cellsHarvested == cellsToChangedState;
+            if (ableToReset)
+            {
+                foreach (PlantCell cell in cells)
+                {
+                    cell.StartResetWithDelay(delay);
+                }
+
+                cellsHarvested = 0;
+                cellsChangedState = 0;
+            }
+        }
+
+        private void MakeCellsInteractable()
+        {
+            foreach (PlantCell cell in cells) 
+                cell.MakeInteractable();
+        }
+
         public void GenerateGrid()
         {
-            Clear();
+            ClearGrid();
             for (int i = 0; i < gridSize.x; i++)
             {
                 for (int j = 0; j < gridSize.y; j++)
@@ -44,76 +125,32 @@ namespace BuilderGame.Gameplay.CellControl.PlantCells
             }
         }
 
-        public void Clear()
+        public void ClearGrid()
         {
             foreach (Transform child in transform)
                 DestroyImmediate(child.gameObject);
             cells.Clear();
         }
 
-        private void Initialize()
+        private void SubscribeOnCellsEvents()
         {
-            PlantStaticData plantStaticData = staticDataService.GetPlantStaticData(plantType);
-            foreach (PlantCell plantCell in cells)
-            {
-                plantCell.Initialize(plantStaticData);
-                plantCell.Reset();
-                MakeCellsInteractable();
-            }
-        }
-
-        private void Start()
-        {
-            cellsChangedState = 0;
-            cellsToChangedState = 0;
             foreach (PlantCell cell in cells)
             {
-                cell.ReadeToChangState += ValidateGridState;
-                cell.Harvested += ValidateReset;
+                cell.ReadeToChangState += OnReadyToChangeState;
+                cell.Grown += OnCellGrown;
+                cell.Harvested += OnHarvested;
                 cellsToChangedState++;
             }
         }
 
-        private void OnDestroy()
+        private void UnsubscribeOnCellsEvents()
         {
             foreach (PlantCell cell in cells)
             {
-                cell.ReadeToChangState -= ValidateGridState;
-                cell.Harvested -= ValidateReset;
+                cell.ReadeToChangState -= OnReadyToChangeState;
+                cell.Grown -= OnCellGrown;
+                cell.Harvested -= OnHarvested;
             }
-        }
-
-        private void ValidateReset()
-        {
-            cellsHarvested++;
-            bool ableToReset = cellsHarvested == cellsToChangedState;
-            if (ableToReset)
-            {
-                foreach (PlantCell plantCell in cells)
-                {
-                    plantCell.StartResetWithDelay(delay);
-                }
-
-                cellsHarvested = 0;
-                cellsChangedState = 0;
-            }
-        }
-
-        private void ValidateGridState()
-        {
-            cellsChangedState++;
-            bool ableToSwitchState = cellsChangedState == cellsToChangedState;
-            if (ableToSwitchState)
-            {
-                cellsChangedState = 0;
-                MakeCellsInteractable();
-            }
-        }
-
-        private void MakeCellsInteractable()
-        {
-            foreach (PlantCell cell in cells) 
-                cell.MakeInteractable();
         }
     }
 }
