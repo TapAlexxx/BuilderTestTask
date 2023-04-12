@@ -1,5 +1,4 @@
-﻿using System;
-using BuilderGame.Gameplay.CellControl.PlantCells;
+﻿using BuilderGame.Gameplay.CellControl.PlantCells;
 using BuilderGame.Gameplay.Unit.Movement;
 using UnityEngine;
 
@@ -12,19 +11,24 @@ namespace BuilderGame.AIControl
         [SerializeField] private PlantGrid grid;
 
         private Transform currentTarget;
+        private bool initialized;
 
         private void OnValidate()
         {
             unitMovement = GetComponentInChildren<UnitMovement>();
         }
-        
+
         public void Initialize(PlantGrid plantGrid)
         {
             grid = plantGrid;
+            initialized = true;
         }
 
         private void Update()
         {
+            if(!initialized)
+                return;
+            
             if(currentTarget == null && grid.TryGetHarvestable(out PlantCell plantCell))
                 currentTarget = plantCell.transform;
             else

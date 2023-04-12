@@ -15,7 +15,7 @@ namespace BuilderGame.Infrastructure
             Container.BindInterfacesTo<BootstrapInstaller>().FromInstance(this);
             
             Container.Bind<IInputProvider>().To<InputProvider>().AsSingle();
-
+            
             Container.Bind<FakeAdsSettings>().FromResources(nameof(FakeAdsSettings)).AsSingle();
             Container.Bind<IAdvertiser>().To<FakeAdvertiser>().AsSingle();
         }
