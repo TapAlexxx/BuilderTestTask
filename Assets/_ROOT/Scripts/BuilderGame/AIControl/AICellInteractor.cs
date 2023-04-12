@@ -10,6 +10,7 @@ namespace BuilderGame.AIControl
     {
         [SerializeField] private UnitHarvester unitHarvester;
         [SerializeField] private UnitCellObserver unitCellObserver;
+        private PlantCell currentPlantCell;
 
         private void OnValidate()
         {
@@ -17,8 +18,20 @@ namespace BuilderGame.AIControl
             unitCellObserver = GetComponentInChildren<UnitCellObserver>();
         }
 
+        private void Awake() => 
+            currentPlantCell = null;
+
+        private void Start() => 
+            unitHarvester.Harvested += Reset;
+
+        private void OnDestroy() => 
+            unitHarvester.Harvested -= Reset;
+
         private void Update()
         {
+            if(currentPlantCell != null)
+                return;
+            
             if(unitCellObserver.TryGetInteractable(out PlantCell plantCell)) 
                 TryInteractWithCell(plantCell);
         }
@@ -27,7 +40,7 @@ namespace BuilderGame.AIControl
         {
             if(plantCell == null || !plantCell.Interactable)
                 return;
-            
+            currentPlantCell = plantCell;
             switch(plantCell.CurrentState)
             {
                 case PlantCellState.Grown:
@@ -35,5 +48,8 @@ namespace BuilderGame.AIControl
                     break;
             }
         }
+
+        private void Reset() => 
+            currentPlantCell = null;
     }
 }
