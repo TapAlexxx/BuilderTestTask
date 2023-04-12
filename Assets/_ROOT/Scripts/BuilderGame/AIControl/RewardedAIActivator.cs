@@ -16,6 +16,8 @@ namespace BuilderGame.AIControl
         private IAdvertiser advertiser;
         private bool initialized;
 
+        public event Action Watched;
+
         private void OnValidate()
         {
             triggerObserver = GetComponentInChildren<TriggerObserver>();
@@ -27,15 +29,11 @@ namespace BuilderGame.AIControl
             this.advertiser = advertiser;
         }
 
-        private void Start()
-        {
+        private void Start() => 
             triggerObserver.TriggerEnter += OnTriggerEntered;
-        }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() => 
             triggerObserver.TriggerEnter -= OnTriggerEntered;
-        }
 
         private void OnTriggerEntered(Collider obj)
         {
@@ -55,6 +53,7 @@ namespace BuilderGame.AIControl
                 case AdWatchResult.Watched:
                     aiInitializer.Initialize(gridToConnectAI);
                     initialized = true;
+                    Watched?.Invoke();
                     break;
                 case AdWatchResult.Closed:
                     Debug.Log("closed");
