@@ -8,9 +8,9 @@ namespace BuilderGame.AIControl
     {
         [SerializeField] private UnitMovement unitMovement;
         [SerializeField] private Transform waitPosition;
-        
+        [SerializeField] private PlantGrid grid;
+
         private Transform currentTarget;
-        private PlantGrid grid;
         private bool initialized;
 
         private void OnValidate()
