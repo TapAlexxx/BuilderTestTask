@@ -14,6 +14,7 @@ namespace BuilderGame.AIControl
         [SerializeField] private TriggerObserver triggerObserver;
         
         private IAdvertiser advertiser;
+        private bool initialized;
 
         private void OnValidate()
         {
@@ -38,10 +39,11 @@ namespace BuilderGame.AIControl
 
         private void OnTriggerEntered(Collider obj)
         {
-            if (obj.CompareTag("Player"))
-            {
+            if(initialized) 
+                return;
+            
+            if (obj.CompareTag("Player")) 
                 ShowRewarded();
-            }
         }
 
         private async void ShowRewarded()
@@ -51,13 +53,14 @@ namespace BuilderGame.AIControl
             switch (result)
             {
                 case AdWatchResult.Watched:
-                    Debug.Log("watched");
+                    aiInitializer.Initialize(gridToConnectAI);
+                    initialized = true;
                     break;
                 case AdWatchResult.Closed:
                     Debug.Log("closed");
                     break;
                 default:
-                    Debug.Log("wentWrong");
+                    Debug.Log("went Wrong");
                     break;
             }
         }
