@@ -8,6 +8,7 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction
     public class UnitPlower : CellInteractable
     {
         [SerializeField] private AnimationEventCallbacks animationEventCallbacks;
+        [SerializeField] private UnitTargetLocker unitTargetLocker;
 
         private PlantCell plantCellToInteract;
 
@@ -17,17 +18,20 @@ namespace BuilderGame.Gameplay.Unit.CellInteraction
         private void OnValidate()
         {
             animationEventCallbacks = GetComponentInChildren<AnimationEventCallbacks>();
+            unitTargetLocker = GetComponentInChildren<UnitTargetLocker>();
         }
 
         public override void StartInteract(PlantCell plantCell)
         {
             StartedInteract?.Invoke();
+            unitTargetLocker.LockTo(plantCell.transform);
             plantCellToInteract = plantCell;
         }
 
         public override void Interact()
         {
             plantCellToInteract.Plow();
+            unitTargetLocker.Unlock();
             EndedInteract?.Invoke();
         }
 
